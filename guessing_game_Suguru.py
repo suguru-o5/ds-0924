@@ -2,7 +2,6 @@ import random
 
 answer = random.randint(1, 1000)
 guess_count = 0
-
 from_number = 1
 to_number = 1000
 
@@ -25,7 +24,7 @@ while True:
     
     if answer == guess_number:
         print(f"You got it! The hidden number is {answer}.")
-        print(f"It took you took {guess_count} guess(es).")
+        print(f"It took you {guess_count} guess(es).")
         break
     else:
         print(f"Wrong! Guess count: {guess_count}.")
