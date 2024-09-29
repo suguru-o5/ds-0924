@@ -16,7 +16,7 @@ while True:
         continue
 
     # Check if the input value is out of range.
-    if guess_number < lower_limit or upper_limit < guess_number:
+    if not lower_limit <= guess_number <= upper_limit:
         print("Out of range. Please input your guess again.")
         continue
 
