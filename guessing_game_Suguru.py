@@ -2,11 +2,11 @@ import random
 
 answer = random.randint(1, 1000)
 guess_count = 0
-from_number = 1
-to_number = 1000
+lower_limit = 1
+upper_limit = 1000
 
 while True:
-    guess_number = input(f"Enter your guess from {from_number} to {to_number}: ")
+    guess_number = input(f"Enter your guess from {lower_limit} to {upper_limit}: ")
 
     # Check if the input value is a valid int.
     try:
@@ -16,7 +16,7 @@ while True:
         continue
 
     # Check if the input value is out of range.
-    if guess_number < from_number or to_number < guess_number:
+    if guess_number < lower_limit or upper_limit < guess_number:
         print("Out of range. Please input your guess again.")
         continue
 
@@ -31,6 +31,6 @@ while True:
 
         # Update the range.
         if answer < guess_number:
-            to_number = guess_number - 1
+            upper_limit = guess_number - 1
         elif guess_number < answer:
-            from_number = guess_number + 1
+            lower_limit = guess_number + 1
