@@ -1,17 +1,12 @@
 user_input_num = input("Enter a number: ")
 user_input_n = input("Enter n: ")
 
-# User input should always be integer value.
-# If the user inputs 0 into n, 
-# this program outputs the whole num because the nth digit does not exist.
+# User input should always be integer value and
+# is not allowed to be out of the range.
 num = int(user_input_num)
 n = int(user_input_n)
 
-divided_num = num
-mod_num = num
+for i in range(n-1):
+    num //= 10
 
-for i in range(n):
-    mod_num = divided_num % 10
-    divided_num //= 10
-
-print(mod_num)
+print(num % 10)
