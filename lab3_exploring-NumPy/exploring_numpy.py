@@ -51,7 +51,7 @@ print(array3 + random_array6)
 # Task9
 random_array7 = np.random.randint(low=1, high=101, size=20)
 print(random_array7[random_array7 > 50])
-random_array7[random_array7 > 30] = -1
+random_array7[random_array7 < 30] = -1
 print(random_array7)
 
 # Task10
