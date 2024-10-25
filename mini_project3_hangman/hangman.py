@@ -1,52 +1,20 @@
 import random
-
-level_to_word_list = {
-    "easy": [
-        "cat",
-        "dog",
-        "sun",
-        "book",
-        "fish",
-        "tree",
-        "chair",
-        "house",
-        "apple",
-        "ball",
-    ],
-    "medium": [
-        "engine",
-        "window",
-        "bottle",
-        "garden",
-        "pirate",
-        "candle",
-        "basket",
-        "winter",
-        "bridge",
-        "monster",
-    ],
-    "hard": [
-        "astronomy",
-        "architecture",
-        "knowledge",
-        "revolution",
-        "unbelievable",
-        "adventure",
-        "questionnaire",
-        "persistence",
-        "trampoline",
-        "hypothesis",
-    ],
-}
+import constants as cnst
 
 
 def main():
-    display_menu()
+    print("Welcome to Hangman!")
+    print("")
 
-    answer = prepare_answer()
+    game_level = determine_game_level()
+    print(f"Let's start {cnst.level_to_display_name[game_level]}!")
+    print("")
+
+    # Prepare some requirements to process
+    answer = prepare_answer(game_level)
     incorrect_guesses_remaining = prepare_incorrect_guesses_remaining()
     processing_letter_list = prepare_processing_letter_list(answer)
-    usedletter_to_index = prepare_usedletter_to_index(answer)
+    usedletter_to_index_list = prepare_usedletter_to_index_list(answer)
     guessed_letter_list = []
 
     while True:
@@ -55,21 +23,17 @@ def main():
             print(f"Game over! The word was: '{answer}'")
             break
         # Game clear logic
-        if not any(usedletter_to_index):
+        if not any(usedletter_to_index_list):
             print(f"Congratulations! You guessed the word: '{answer}'")
             break
 
         # Print current word
         print("Current word: ", end="")
-        for letter in processing_letter_list:
-            print(letter, end=" ")
-        print("")
+        print(" ".join(processing_letter_list))
 
         # Print guessed letters
         print("Guessed letters: ", end="")
-        for letter in guessed_letter_list:
-            print(letter, end=", ")
-        print("")
+        print(", ".join(guessed_letter_list))
 
         # Print incorrect guess remaining
         print(f"Incorrect guesses remaining: {incorrect_guesses_remaining}")
@@ -77,7 +41,7 @@ def main():
         input_letter = validated_input_letter(guessed_letter_list)
         guessed_letter_list.append(input_letter)
 
-        if usedletter_to_index.get(input_letter) is None:
+        if usedletter_to_index_list.get(input_letter) is None:
             print(f"Sorry, '{input_letter}' is not in the word.")
             print("")
             incorrect_guesses_remaining -= 1
@@ -85,16 +49,12 @@ def main():
             print(f"Good job! '{input_letter}' is in the word.")
             print("")
 
-            # Replace the blank letter in the processing letter list
+            # Replace the hidden letter(s) in the processing letter list
             # with the guessed letter
-            for to_be_replaced_index in usedletter_to_index[input_letter]:
+            for to_be_replaced_index in usedletter_to_index_list[input_letter]:
                 processing_letter_list[to_be_replaced_index] = input_letter
-            del usedletter_to_index[input_letter]
-
-
-def display_menu():
-    print("Welcome to Hangman!")
-    print("")
+            # Delete the key and value which is completed to replace
+            del usedletter_to_index_list[input_letter]
 
 
 def determine_game_level():
@@ -104,19 +64,17 @@ def determine_game_level():
         print("2. Medium")
         print("3. Hard")
         input_game_level = input("Input the level by number: ")
-        level_definition = {"1": "easy", "2": "medium", "3": "hard"}
 
-        if not level_definition.get(input_game_level):
+        if not input_game_level in cnst.level_to_word_list.keys():
             print("Please input 1, 2, or 3")
             print("")
             continue
         else:
-            return level_definition[input_game_level]
+            return input_game_level
 
 
-def prepare_answer():
-    game_level = determine_game_level()
-    word_list = level_to_word_list[game_level]
+def prepare_answer(game_level: str):
+    word_list = cnst.level_to_word_list[game_level]
     return random.choice(word_list)
 
 
@@ -129,14 +87,17 @@ def prepare_processing_letter_list(answer: str):
     return ["_"] * len(answer)
 
 
-def prepare_usedletter_to_index(answer: str):
-    usedletter_to_index: dict = {}
+def prepare_usedletter_to_index_list(answer: str):
+    # Key:letters used in the answer, Value:a list of the indexes
+    usedletter_to_index_list: dict = {}
+
     for i in range(len(answer)):
-        if usedletter_to_index.get(answer[i]):
-            usedletter_to_index[answer[i]].append(i)
-        else:
-            usedletter_to_index[answer[i]] = [i]
-    return usedletter_to_index
+        # Add a key with an empty list when the key doesn't exist in the dict.
+        if not answer[i] in usedletter_to_index_list.keys():
+            usedletter_to_index_list[answer[i]] = []
+        usedletter_to_index_list[answer[i]].append(i)
+
+    return usedletter_to_index_list
 
 
 def validated_input_letter(guessed_letter_list: list):
