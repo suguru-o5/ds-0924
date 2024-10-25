@@ -1,4 +1,6 @@
 import random
+import re
+
 import constants as cnst
 
 
@@ -41,20 +43,38 @@ def main():
         input_letter = validated_input_letter(guessed_letter_list)
         guessed_letter_list.append(input_letter)
 
-        if usedletter_to_index_list.get(input_letter) is None:
-            print(f"Sorry, '{input_letter}' is not in the word.")
-            print("")
-            incorrect_guesses_remaining -= 1
-        else:
-            print(f"Good job! '{input_letter}' is in the word.")
-            print("")
+        # Check the guess
+        check_result = check_the_guess(
+            input_letter, usedletter_to_index_list, processing_letter_list
+        )
 
-            # Replace the hidden letter(s) in the processing letter list
-            # with the guessed letter
-            for to_be_replaced_index in usedletter_to_index_list[input_letter]:
-                processing_letter_list[to_be_replaced_index] = input_letter
-            # Delete the key and value which is completed to replace
-            del usedletter_to_index_list[input_letter]
+        # Update the variables
+        input_letter = check_result[0]
+        usedletter_to_index_list = check_result[1]
+        processing_letter_list = check_result[2]
+
+
+def check_the_guess(input_letter, usedletter_to_index_list, processing_letter_list):
+    # Correct guess logic
+    if not input_letter in usedletter_to_index_list.keys():
+        incorrect_guesses_remaining -= 1
+
+        print(f"Sorry, '{input_letter}' is not in the word.")
+        print("")
+
+    # Wrong guess logic
+    else:
+        # Replace the hidden letter(s) in the processing letter list
+        # with the guessed letter
+        for to_be_replaced_index in usedletter_to_index_list[input_letter]:
+            processing_letter_list[to_be_replaced_index] = input_letter
+        # Delete the key and value which is completed to replace
+        del usedletter_to_index_list[input_letter]
+
+        print(f"Good job! '{input_letter}' is in the word.")
+        print("")
+
+    return input_letter, usedletter_to_index_list, processing_letter_list
 
 
 def determine_game_level():
@@ -101,8 +121,6 @@ def prepare_usedletter_to_index_list(answer: str):
 
 
 def validated_input_letter(guessed_letter_list: list):
-    import re
-
     r = re.compile("^[a-zA-Z]*$")
 
     while True:
