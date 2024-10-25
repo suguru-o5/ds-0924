@@ -108,7 +108,7 @@ def prepare_processing_letter_list(answer: str):
 
 
 def prepare_usedletter_to_index_list(answer: str):
-    # Key:letters used in the answer, Value:a list of the indexes
+    # Key: Letters used in the answer, Value: A list of the indexes
     usedletter_to_index_list: dict = {}
 
     for i in range(len(answer)):
