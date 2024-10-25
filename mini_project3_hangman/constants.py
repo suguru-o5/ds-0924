@@ -1,4 +1,5 @@
 level_to_word_list = {
+    # Easy word list
     "1": [
         "cat",
         "dog",
@@ -11,6 +12,7 @@ level_to_word_list = {
         "apple",
         "ball",
     ],
+    # Medium word list
     "2": [
         "engine",
         "window",
@@ -23,6 +25,7 @@ level_to_word_list = {
         "bridge",
         "monster",
     ],
+    # Hard word list
     "3": [
         "astronomy",
         "architecture",

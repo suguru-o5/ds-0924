@@ -13,7 +13,7 @@ def main():
     print("")
 
     # Prepare some requirements to process
-    answer = prepare_answer(game_level)
+    answer = select_word(game_level)
     incorrect_guesses_remaining = prepare_incorrect_guesses_remaining()
     processing_letter_list = prepare_processing_letter_list(answer)
     usedletter_to_index_list = prepare_usedletter_to_index_list(answer)
@@ -93,7 +93,7 @@ def determine_game_level():
             return input_game_level
 
 
-def prepare_answer(game_level: str):
+def select_word(game_level: str):
     word_list = cnst.level_to_word_list[game_level]
     return random.choice(word_list)
 
