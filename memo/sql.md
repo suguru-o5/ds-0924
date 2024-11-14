@@ -824,3 +824,186 @@ from prime_ministers as t1
 cross join
 presidents as t2;
 ```
+
+Ramya Kappagantu
+  14:05
+```
+insert into monarchs(country, continent, monarch) values('Brunei', 'Asia', 'Hassanal Bolkiah');
+insert into monarchs(country, continent, monarch) values('Oman', 'Asia', 'Haitham bin Tarik');
+insert into monarchs(country, continent, monarch) values('Norway', 'Europe', 'Herald V');
+insert into monarchs(country, continent, monarch) values('United Kingdom', 'Europe', 'Elizabeth II');
+commit;
+```
+
+Ramya Kappagantu
+  14:20
+```
+--union all and order by
+select country, continent, president as leader
+from 
+presidents
+union all
+select *
+from
+monarchs
+union all
+select *
+from 
+prime_ministers
+order by 2 desc, 1;
+```
+14:21
+```
+select country, continent, president as leader
+from 
+presidents
+union all
+select *
+from
+monarchs
+union
+select *
+from 
+prime_ministers
+order by 2 desc, 1;
+```
+
+Ramya Kappagantu
+  14:35
+```
+--union and intersect
+select country, continent
+from 
+presidents
+intersect
+select country, continent
+from
+monarchs
+union
+select country, continent
+from 
+prime_ministers
+order by 2 desc, 1;
+```
+
+Ramya Kappagantu
+  14:35
+```
+--union and intersect
+select country, continent
+from 
+presidents
+intersect
+select country, continent
+from
+monarchs
+union
+select country, continent
+from 
+prime_ministers
+order by 2 desc, 1;
+```
+
+14:39
+```
+--except
+select country, continent
+from 
+presidents
+except
+select country, continent
+from
+monarchs
+except
+select country, continent
+from 
+prime_ministers;
+```
+Ramya Kappagantu
+  14:59
+```
+--update values for pr_id
+update presidents set pr_id=1 where country='Egypt';
+update presidents set pr_id=2 where country='Portugal';
+update presidents set pr_id=3 where country='USA';
+update presidents set pr_id=4 where country='Uruguay';
+update presidents set pr_id=5 where country='Pakistan';
+update presidents set pr_id=6 where country='Chile';
+update presidents set pr_id=7 where country='India';
+```
+
+15:03
+```
+--alter presidents table
+alter table presidents
+add column president_id int4;
+alter table presidents
+rename column president_id to pr_id;
+alter table presidents 
+add constraint presidents_pk
+primary key (pr_id);
+```
+
+15:08
+```
+--monarchs table 
+alter table monarchs
+add column monarch_id int4; 
+alter table monarchs
+add column m_pr_id int4;
+
+update monarchs set monarch_id=1 where country='Brunei';
+update monarchs set monarch_id=2 where country='Oman';
+update monarchs set monarch_id=3 where country='Norway';
+update monarchs set monarch_id=4 where country='United Kingdom';
+```
+
+Ramya Kappagantu
+  15:14
+```
+--add foreign key from monarchs to presidents
+alter table monarchs
+add constraint monarchs_pk
+primary key(monarch_id);
+
+alter table monarchs
+add constraint monarchs_fk
+foreign key(m_pr_id) references presidents(pr_id);
+```
+
+Ramya Kappagantu
+  15:14
+```
+--add foreign key from monarchs to presidents
+alter table monarchs
+add constraint monarchs_pk
+primary key(monarch_id);
+
+alter table monarchs
+add constraint monarchs_fk
+foreign key(m_pr_id) references presidents(pr_id);
+```
+
+Ramya Kappagantu
+  15:47
+```
+--delete, truncate and drop
+delete from monarchs where continent='Europe';
+truncate monarchs;
+drop table monarchs;
+```
+
+Ramya Kappagantu
+  15:47
+```
+--delete, truncate and drop
+delete from monarchs where continent='Europe';
+truncate monarchs;
+drop table monarchs;
+```
+
+15:49
+```
+--drop a view from the database
+drop view ind_egy_ministers;
+```
