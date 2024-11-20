@@ -1007,3 +1007,183 @@ drop table monarchs;
 --drop a view from the database
 drop view ind_egy_ministers;
 ```
+
+Ramya Kappagantu
+  14:56
+```
+create table sales(
+	SaleID int4 primary key,
+	Salesperson varchar(50),
+	Saleamount int4,
+	Saledate date
+);
+
+insert into sales(SaleID, Salesperson, Saleamount, Salewdate) values
+(1, 'Alice', 300, '2023-01-01'),
+(2, 'Bob', 150, '2023-01-02'),
+(3, 'Alice', 200, '2023-01-03'),
+(4, 'Charlie', 250, '2023-01-04'),
+(5, 'Bob', 300, '2023-01-05'),
+(6, 'Alice', 100, '2023-01-06'),
+(7, 'Charlie', 350, '2023-01-07'),
+(8, 'Alice', 450, '2023-01-08'),
+(9, 'Bob', 200, '2023-01-09'),
+(10, 'Charlie', 400, '2023-01-10'),
+(11, 'Alice', 150, '2023-01-11'),
+(12, 'Bob', 250, '2023-01-12'),
+(13, 'Charlie', 300, '2023-01-13'),
+(14, 'Alice', 350, '2023-01-14'),
+(15, 'Bob', 100, '2023-01-15');
+```
+
+
+Ramya Kappagantu
+  15:08
+```
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	min(saleamount) over() as min_sales
+from 
+sales;
+```
+
+Ramya Kappagantu
+  15:15
+```
+--opening sales and closing sales for the day
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	first_value(saleamount) over(partition by saledate) as first_sale_in_day,
+	last_value(saleamount) over(partition by saledate, salesperson) as last_sale_day_person
+from 
+sales;
+```
+
+15:22
+```
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	rank() over(order by saleamount desc) sales_rank,
+	dense_rank() over(order by saleamount desc) dense_sales_rank
+from 
+sales;
+```
+
+15:25
+```
+--numbering each row explicitly
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	row_number() over() as sales_no
+from 
+sales;
+```
+
+15:28
+```
+--numbering rows for each partition
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	row_number() 
+	over(partition by saleamount order by saleamount desc) 
+	as sales_amount_no
+from 
+sales;
+```
+
+
+
+
+15:32
+```
+--Sliding windows
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	avg(saleamount)
+	over(order by saleamount 
+	rows between unbounded preceding and current row) as moving_average
+from 
+sales;
+```
+
+15:34
+```
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	avg(saleamount)
+	over(order by saleamount 
+	rows between current row and unbounded following) as moving_average
+from 
+sales;
+```
+
+15:35
+```
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	avg(saleamount)
+	over(order by saleamount 
+	rows between unbounded preceding and unbounded following) as moving_average
+from 
+sales;
+```
+
+
+15:37
+```
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	avg(saleamount)
+	over(order by saleamount 
+	rows between unbounded preceding and unbounded following) as moving_average,
+	avg(saleamount)
+	over() as moving_avg
+from 
+sales;
+```
+
+Ramya Kappagantu
+  15:43
+```
+--data quartile
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	ntile(4) over 
+	() as quartile
+from 
+sales;
+```
+
+Ramya Kappagantu
+  15:49
+```
+--lag and lead to find out immediate and previous sales
+select 
+	salesperson,
+	saleamount,
+	saledate,
+	lag(saleamount) over() as previous_immediate_sales,
+	lead(saleamount) over() as next_immediate_sales
+from 
+sales;
+```
