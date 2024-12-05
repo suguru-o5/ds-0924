@@ -104,7 +104,7 @@ print(
 # Exercise 18:
 # Use a lambda function to filter out all words from a list that are longer than 4 characters.
 words = ["apple", "bat", "cat", "dolphin"]
-print(list(filter(lambda x: len(x) <= 4, words)))  # Output:['bat', 'cat']
+print(list(filter(lambda x: len(x) > 4, words)))  # Output:['apple', 'dolphin']
 
 # Exercise 19:
 # Create a lambda function to find the factorial of a number using reduce() .
