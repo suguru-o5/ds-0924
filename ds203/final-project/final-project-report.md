@@ -81,6 +81,13 @@ Now, check the correlation.
 
 ### Objective 1: Analyze the relationship between studytime and the average grade 
 #### Hypothesis: Students who spend more time studying tend to perform better.
+
+- Variable Definition
+    - studytime: 
+        Weekly study time (from 1 to 4: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
+    - grade:
+        The average grade of the three periods (from 0 to 20)
+
 - SQL Query:
 
     <img src="images/studytime_and_avg_grade_sql.png" width="60%">
@@ -96,6 +103,13 @@ Now, check the correlation.
 
 ### Objective 2: Analyze the relationship between the number of absence and the average grade 
 #### Hypothesis: Students with higher class attendance rates have better overall grades.
+
+- Variable Definition
+    - absences: 
+        Number of school absences (from 0 to 93)
+    - grade:
+        The average grade of the three periods (from 0 to 20)
+
 - SQL Query:
 
     <img src="images/absence_and_avg_grade_sql.png" width="60%">
@@ -112,6 +126,15 @@ Now, check the correlation.
 
 ### Objective 3: Analyze the relationship between the parent's education level and the average grade
 #### Hypothesis: Students whose parents had a higher level of education tend to perform better.
+
+- Variable Definition
+    - Medu: 
+        mother's education (from 1 to 4: 0 - none, 1 - primary education (4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher education)
+    - Fedu: 
+        father's education (from 1 to 4: 0 - none, 1 - primary education (4th grade), 2 â€“ 5th to 9th grade, 3 â€“ secondary education or 4 â€“ higher education)	
+    - grade:
+        The average grade of the three periods (from 0 to 20)
+
 - SQL Query:
 
     <img src="images/parents_edu_and_avg_grade_sql.png" width="60%">
