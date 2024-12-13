@@ -84,7 +84,7 @@ Now, check the correlation.
 
 - Variable Definition
     - studytime: 
-        Weekly study time (from 1 to 4: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
+        Weekly study time (from 1 to 4: 1 - less than 2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - more than 10 hours)
     - grade:
         The average grade of the three periods (from 0 to 20)
 
