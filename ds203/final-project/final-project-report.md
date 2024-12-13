@@ -2,20 +2,19 @@
 
 ## 1. Introduction
 
-### Objective:
+### Objective
 The objective of this project is to analyze students' performance using BigQuery.  
 The focus is on understanding causes which influence students' performance, visualizing them, and suggesting how we can help them improve their performance.
 
-### Dataset used:
+### Dataset used
 - Student Performance Dataset:  
-Obtained in a survey of students' math course in secondary school.  
-Contains variable features such as age, gender, grades, etc.  
-The whole details are here in the link:  
-https://archive.ics.uci.edu/dataset/320/student+performance
+    -  Obtained in a survey of students' math courses at two Portuguese secondary schools. Contains variable features such as age, gender, grades, etc. 
+    The whole details are here in the link:  
+    https://archive.ics.uci.edu/dataset/320/student+performance
 
 ## 2. Data Exploration
 
-### Key Findings:
+### Key Findings
 Upon exploring the dataset and just with basic SQLs, I found that there seems to be no specific relationship between gender and the grade each student got.
 
 - Select the number of each gender.
@@ -46,18 +45,18 @@ I will calculate the average of the three, and use it as the student's performan
 
 ### Correlation of Important Factors
 
-#### Here, I focus on the following three factors that might influence student's performance.
-    - Study Time 
-    - Absence
-    - Parent's Educational Level
+Here, I focus on the following three factors that might influence student's performance.
+- Study Time 
+- Absence
+- Parent's Educational Level
 
-#### Now, I check the correlation.
+Now, check the correlation.
 
 - SQL Query:
 
     ![correlation sql](images/correlation_sql.png)
 
-- Visualization:
+- Visualization (Matplotlib, seaborn):
 
     ![correlation chart](images/correlation.png)
 
@@ -66,7 +65,7 @@ I will calculate the average of the three, and use it as the student's performan
     - There are slight positive correlations between study time and grade, father education and grade, mother education and grade, and father education and mother education.
     - Absences and avg_grade have a weak negative correlation (-0.0059), implying that a slight increase in absences might be associated with a slightly lower average grade.
 
-#### I will investigate it more deeply in the following sections.
+I will investigate the findings above more deeply in the following sections.
 
 ### Objective 1: Analyze the relationship between studytime and the average grade 
 #### Hypothesis: Students who spend more time studying tend to perform better.
@@ -74,7 +73,7 @@ I will calculate the average of the three, and use it as the student's performan
 
     ![studytime and avg grade sql](images/studytime_and_avg_grade_sql.png)
 
-- Visualization:
+- Visualization (Matplotlib):
 
     ![studytime and grade](images/studytime_and_grade_chart.png)
 
@@ -88,7 +87,7 @@ I will calculate the average of the three, and use it as the student's performan
 
     ![absence and avg grade sql](images/absence_and_avg_grade_sql.png)
 
-- Visualization:
+- Visualization (Matplotlib):
 
     ![absence and avg grade chart](images/absence_and_grade_chart.png)
 
@@ -96,16 +95,13 @@ I will calculate the average of the three, and use it as the student's performan
     - The scatter plot shows a general trend where students with more absences tend to have lower average grades.
     - Most students with high grades (above 14) have fewer than 20 absences.
 
-
-
-
 ### Objective 3: Analyze the relationship between the parent's education level and the average grade
 #### Hypothesis: Students whose parents had a higher level of education tend to perform better.
 - SQL Query:
 
     ![parents education and avg grade sql](images/parents_edu_and_avg_grade_sql.png)
 
-- Visualization:
+- Visualization (Matplotlib, seaborn):
 
     ![parents education and avg grade chart](images/parents_edu_grade_chart.png)
 
@@ -113,8 +109,7 @@ I will calculate the average of the three, and use it as the student's performan
 - Findings:  
     - Students with well-educated parents tend to achieve higher grades.
     - Students with Medu = 1, Fedu = 0 and Medu = 0, Fedu = 2 have unexpectedly high grades (14.7 and 14.8), warranting further investigation.
-
-
+  
 ## 5. Conclusion
 
 ### Summary
@@ -130,6 +125,8 @@ A comprehensive approach is needed because students' academic performance depend
     - Be attentive to reasons for absences, including health and family circumstances. Then address it if any issue exists. Parents and schools would need to work together in that case.
 - Parent's Educational Level.
     - Hold workshops and information sessions for parents, providing them with ways to support their children's studies and educational approaches, which may help parents become more actively involved in their children's studies and improve academic outcomes.
+### Future Work:
+The dataset I used has more interesting features, such as student's daily alcohol consumption, romantic relationships, etc. Other factors which could affect the student's performance might be found by analyzing these features.
 
 ## Referece
 https://www.kaggle.com/datasets/devansodariya/student-performance-data
