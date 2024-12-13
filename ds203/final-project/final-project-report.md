@@ -131,7 +131,7 @@ Now, check the correlation.
     - Medu: 
         mother's education (from 1 to 4: 0 - none, 1 - primary education (4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher education)
     - Fedu: 
-        father's education (from 1 to 4: 0 - none, 1 - primary education (4th grade), 2 â€“ 5th to 9th grade, 3 â€“ secondary education or 4 â€“ higher education)	
+        father's education (from 1 to 4: 0 - none, 1 - primary education (4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher education)	
     - grade:
         The average grade of the three periods (from 0 to 20)
 
