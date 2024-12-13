@@ -1,4 +1,4 @@
-# Analyzing Student Performance Data with BigQuery
+# Analyzing Students' Performance Data with BigQuery
 
 ## 1. Introduction
 
@@ -12,6 +12,8 @@ The focus is on understanding causes which influence students' performance, visu
     The whole details are here in the link:  
     https://archive.ics.uci.edu/dataset/320/student+performance
 
+<br>
+
 ## 2. Data Exploration
 
 ### Key Findings
@@ -19,22 +21,30 @@ Upon exploring the dataset and just with basic SQLs, I found that there seems to
 
 - Select the number of each gender.
 
-![Gender count](images/gender_count.png)
+    <img src="images/gender_count.png" width="70%">
 
 - Select the average grade of each gender.
 
-![Average grade by gender](images/avg_grade_by_gender.png)
+    <img src="images/avg_grade_by_gender.png" width="60%">
 
 - Select the top 10 students in the average grade with gender.
 
-![Average grade by gender](images/top10_avg_grade_with_gender.png)
+    <img src="images/top10_avg_grade_with_gender.png" width="60%">
+
+
+<br>
 
 ## 3. Data Cleaning
 
 ### Identify if there is any column which has null value
-![identify null value](images/identify_null_value.png)
 
-Here, there is no column which has missing value.
+- SQL Query:
+
+    <img src="images/identify_null_value.png" width="70%">
+
+    Here, there is no column which has missing value.
+
+<br>
 
 ## 4. Data Analysis with Visualization
 
@@ -54,62 +64,69 @@ Now, check the correlation.
 
 - SQL Query:
 
-    ![correlation sql](images/correlation_sql.png)
+    <img src="images/correlation_sql.png" width="60%">
 
 - Visualization (Matplotlib, seaborn):
 
-    ![correlation chart](images/correlation.png)
+    <img src="images/correlation.png" width="60%">
 
 - Findings:  
 
     - There are slight positive correlations between study time and grade, father education and grade, mother education and grade, and father education and mother education.
     - Absences and avg_grade have a weak negative correlation (-0.0059), implying that a slight increase in absences might be associated with a slightly lower average grade.
 
-I will investigate the findings above more deeply in the following sections.
+    I will investigate the findings above more deeply in the following sections.
+
+<br>
 
 ### Objective 1: Analyze the relationship between studytime and the average grade 
 #### Hypothesis: Students who spend more time studying tend to perform better.
 - SQL Query:
 
-    ![studytime and avg grade sql](images/studytime_and_avg_grade_sql.png)
+    <img src="images/studytime_and_avg_grade_sql.png" width="60%">
 
 - Visualization (Matplotlib):
 
-    ![studytime and grade](images/studytime_and_grade_chart.png)
+    <img src="images/studytime_and_grade_chart.png" width="60%">
 
 - Findings:  
     - This analysis shows a positive correlation between study-time and the average grade, indicating that students studying longer tend to achieve higher grades.
 
+<br>
 
 ### Objective 2: Analyze the relationship between the number of absence and the average grade 
 #### Hypothesis: Students with higher class attendance rates have better overall grades.
 - SQL Query:
 
-    ![absence and avg grade sql](images/absence_and_avg_grade_sql.png)
+    <img src="images/absence_and_avg_grade_sql.png" width="60%">
 
 - Visualization (Matplotlib):
 
-    ![absence and avg grade chart](images/absence_and_grade_chart.png)
+    <img src="images/absence_and_grade_chart.png" width="60%">
 
 - Findings:  
     - The scatter plot shows a general trend where students with more absences tend to have lower average grades.
     - Most students with high grades (above 14) have fewer than 20 absences.
 
+<br>
+
 ### Objective 3: Analyze the relationship between the parent's education level and the average grade
 #### Hypothesis: Students whose parents had a higher level of education tend to perform better.
 - SQL Query:
 
-    ![parents education and avg grade sql](images/parents_edu_and_avg_grade_sql.png)
+    <img src="images/parents_edu_and_avg_grade_sql.png" width="60%">
 
 - Visualization (Matplotlib, seaborn):
 
-    ![parents education and avg grade chart](images/parents_edu_grade_chart.png)
+    <img src="images/parents_edu_grade_chart.png" width="60%">
 
 
 - Findings:  
     - Students with well-educated parents tend to achieve higher grades.
     - Students with Medu = 1, Fedu = 0 and Medu = 0, Fedu = 2 have unexpectedly high grades (14.7 and 14.8), warranting further investigation.
-  
+
+<br>
+
 ## 5. Conclusion
 
 ### Summary
@@ -125,9 +142,12 @@ A comprehensive approach is needed because students' academic performance depend
     - Be attentive to reasons for absences, including health and family circumstances. Then address it if any issue exists. Parents and schools would need to work together in that case.
 - Parent's Educational Level.
     - Hold workshops and information sessions for parents, providing them with ways to support their children's studies and educational approaches, which may help parents become more actively involved in their children's studies and improve academic outcomes.
-### Future Work:
+
+### Future Work
 The dataset I used has more interesting features, such as student's daily alcohol consumption, romantic relationships, etc. Other factors which could affect the student's performance might be found by analyzing these features.
 
+<br>
+
 ## Referece
-https://www.kaggle.com/datasets/devansodariya/student-performance-data
+https://www.kaggle.com/datasets/devansodariya/student-performance-data  
 https://archive.ics.uci.edu/dataset/320/student+performance
